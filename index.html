@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Eclipse</title>
+
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    input {
+      background: black;
+      color: #00ff00;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 18px;
+      width: 100%;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,0,0.03),
+        rgba(0,255,0,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="terminal">
+INITIALIZING SYSTEM...
+
+ACCESSING SECURE DATABASE...
+
+WELCOME TO PROJECT ECLIPSE
+
+Type the password:
+</div>
+
+<input type="text" id="commandInput" autofocus>
+
+<script>
+  const terminal = document.getElementById("terminal");
+  const input = document.getElementById("commandInput");
+
+  let stage = 1;
+
+  input.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+      const value = input.value.trim();
+
+      terminal.innerHTML += "\n\n> " + value;
+
+      if (stage === 1) {
+
+        if (value.toLowerCase() === "starlight") {
+
+          terminal.innerHTML += "\nACCESS GRANTED";
+          terminal.innerHTML += "\n\nLEVEL 2";
+          terminal.innerHTML += "\nDecode this hex code:";
+          terminal.innerHTML += "\n73 20 6c 6f 76 65 20 79 6f 75";
+
+          stage = 2;
+
+        } else {
+
+          terminal.innerHTML += "\nACCESS DENIED";
+        }
+
+      } else if (stage === 2) {
+
+        if (value.toLowerCase() === "i love you") {
+
+          terminal.innerHTML += "\n\nDECRYPTION SUCCESSFUL";
+          terminal.innerHTML += "\n\nFINAL LEVEL";
+          terminal.innerHTML += "\nWhat date did we first meet?";
+
+          stage = 3;
+
+        } else {
+
+          terminal.innerHTML += "\nIncorrect answer.";
+        }
+
+      } else if (stage === 3) {
+
+        if (value === "YOUR DATE HERE") {
+
+          terminal.innerHTML += "\n\nESCAPE COMPLETE";
+          terminal.innerHTML += "\n❤️ SECRET MESSAGE UNLOCKED ❤️";
+          terminal.innerHTML += "\n\nYou are the best thing that ever happened to me.";
+
+        } else {
+
+          terminal.innerHTML += "\nWrong answer.";
+        }
+      }
+
+      input.value = "";
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  });
+</script>
+
+</body>
+</html>
